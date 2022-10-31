@@ -1,21 +1,1023 @@
-runtimeVersion: 0.2.14
+runtimeVersion: 0.3.2
+name: Private App Boilerplate
+description: ''
 type: com.dynaboard/project
-name: Example Template
-description: Optional description of your template
 nodes:
   ROOT_NODE:
-    id: ROOT_NODE
     type: ROOT_NODE
     name: ROOT_NODE
-    parentNodeID: ROOT_NODE
-    parentSlot: ROOT_NODE
     slots:
       pages:
-        - nodeID: bb071577-c4ea-4614-98e6-9ad31c233cbe
+        - nodeID: 9f24a8bf-f473-44bc-be30-5f9f93af0b73
+          orderKey: Zy
+        - nodeID: a80c572a-aa7d-4b27-be6d-063f306d091a
+          orderKey: ZyV
+        - nodeID: 85be03a7-26f3-448e-a28c-b02f140eaac4
+          orderKey: Zz
+        - nodeID: ba8d3744-1d6f-468c-80b2-8c175f1be615
+          orderKey: a1V
+      resources:
+        - nodeID: e51f3503-2710-4e96-a08a-b25e9e12d9d6
           orderKey: a0
-  bb071577-c4ea-4614-98e6-9ad31c233cbe:
-    id: bb071577-c4ea-4614-98e6-9ad31c233cbe
+        - nodeID: 1e2c1ed8-877c-41c3-8df5-e9c93318a6ca
+          orderKey: a3
+        - nodeID: e4b06603-006c-464a-90ff-b971cd03c536
+          orderKey: a4
+        - nodeID: 19e51a8d-13ed-4acf-81b6-8d67e4cefe8c
+          orderKey: a5
+      config:
+        - nodeID: 649568b9-3b1e-4d66-b01e-9e15ec840bf1
+          orderKey: a0
+      themes:
+        - nodeID: de555cfd-936b-47f8-af1b-95630f0dc8fa
+          orderKey: a0
+      components:
+        - nodeID: f18d2641-f968-47c7-8b97-509c1bf13d97
+          orderKey: a0
+    properties:
+      authorizationRules: |-
+        [
+          {
+            if: {
+              $and: [
+                {
+                  'session/user': {
+                    $exists: true,
+                  },
+                },
+              ],
+            },
+            then: {
+              allow: true,
+            },
+          },
+          {
+            if: {
+              $and: [
+                {
+                  'session/user': {
+                    $exists: false,
+                  },
+                },
+              ],
+            },
+            then: {
+              allow: false,
+              redirectTo: '/auth',
+              statusCode: 302,
+            },
+          },
+        ]
+      selectedTheme: de555cfd-936b-47f8-af1b-95630f0dc8fa
+  03e8e2ed-0901-4570-b59a-9eddae662ecf:
+    type: FUNCTION
+    name: demoLink
+    properties:
+      action:
+        path: /
+        target: _self
+        targetNode:
+          ref: e4b06603-006c-464a-90ff-b971cd03c536
+        actionType: NAVIGATE_TO_PAGE
+  052ab897-60ae-412d-9847-7c026c1a888e:
+    type: BUTTON
+    name: demoReturnButton
+    properties:
+      left: '11'
+      width: '2'
+      height: '3'
+      onClick:
+        function:
+          ref: 03e8e2ed-0901-4570-b59a-9eddae662ecf
+      text: Back to Demo
+  1136b3dc-a411-4b78-a8b8-8422c9cd530e:
+    type: BUTTON
+    name: readmeButton
+    properties:
+      top: '3'
+      left: '9'
+      width: '4'
+      height: '2'
+      onClick:
+        function:
+          ref: bdef48e4-0e40-4471-bb95-e397ae675bfd
+      text: View README
+      textColor: text.muted
+      backgroundColor: |
+        transparent
+      variant: outline
+  19e51a8d-13ed-4acf-81b6-8d67e4cefe8c:
+    type: RESOURCE/USER_SESSION
+    name: userSession1
+  1c8b806b-f233-47ff-a95c-ce8ffca57e2b:
+    type: TEXT
+    name: pageTitleText
+    properties:
+      width: '10'
+      height: '3'
+      styles: |-
+        element.styles {
+          line-height: 1.2em;
+        }
+      value: |-
+        README — 
+         Private App Boilerplate
+      fontSize: 3xl
+      textOverflow: ellipsis
+  1e2c1ed8-877c-41c3-8df5-e9c93318a6ca:
+    type: RESOURCE/ONE_TIME_PIN_AUTH
+    name: oneTimePinAuth1
+  25865758-88d1-466a-9ee5-d5dc858dc3e3:
+    type: TEXT
+    name: authResourceDisplayNameDisplay
+    properties:
+      top: '12'
+      width: '12'
+      height: '2'
+      overflow: ''
+      overflowX: ''
+      overflowY: ''
+      value: '{{getUserInfo.data?.provider.name ?? ''(unknown)''}}'
+      fontSize: lg
+      fontWeight: bold
+  2eb4c1f7-9c45-442a-a6eb-4d36e4076464:
+    type: SIGN-IN
+    name: signInComponent
+    properties:
+      top: '12'
+      width: '12'
+      height: '17'
+      onSuccess:
+        function:
+          ref: efdca26e-20a6-4eca-8987-3fb876f15053
+  2f4a9d12-86f8-49e6-b114-26dac5e1027f:
+    type: TEXT
+    name: pageTitleText
+    properties:
+      width: '8'
+      height: '4'
+      styles: |-
+        element.styles {
+          line-height:L 1.2;
+        }
+      value: '{{$props.headerText}}'
+      fontSize: 3xl
+      textOverflow: ellipsis
+  36173fa4-c680-436f-9449-fded1f3c14a0:
+    type: TEXT
+    name: authResourceTypeDisplay
+    properties:
+      top: '4'
+      width: '12'
+      height: '2'
+      overflow: ''
+      overflowX: ''
+      overflowY: ''
+      value: '{{getUserInfo.data?.provider.resourceType ?? ''(unknown)''}}'
+      fontSize: lg
+      fontWeight: bold
+  44f052dc-efbf-44bf-bf88-d308d3c2147c:
+    type: TEXT
+    name: gettingStartedText
+    properties:
+      top: '25'
+      left: '3'
+      width: '8'
+      height: '4'
+      value: >-
+        Check out the __[README](/README)__, visit the __[User Info
+        Example](/userInfoExample)__ page, or duplicate this page to get
+        started.
+      renderMode: markdown
+      fontSize: xl
+      textAlign: center
+  45908125-ab82-445e-b6ae-17097bd4df5e:
+    type: TEXT
+    name: userEmailDisplay
+    properties:
+      top: '4'
+      width: '12'
+      height: '2'
+      overflow: ''
+      overflowX: ''
+      overflowY: ''
+      value: '{{getUserInfo.data?.email ?? ''(unknown)''}}'
+      fontSize: lg
+      fontWeight: bold
+  4c4d981f-e0e8-405d-b0ef-8b68994c21e2:
+    type: TEXT
+    name: userNameDisplay
+    properties:
+      top: '12'
+      width: '12'
+      height: '2'
+      value: '{{getUserInfo.data?.name ?? ''(unknown)''}}'
+      fontSize: lg
+      fontWeight: bold
+  4f244a5a-78df-4687-862c-0b68168112b9:
+    type: FUNCTION
+    name: readmeLink
+    properties:
+      action:
+        path: /README
+        target: _self
+        targetNode:
+          ref: e4b06603-006c-464a-90ff-b971cd03c536
+        actionType: NAVIGATE_TO_PAGE
+  53655710-9379-48a8-839e-e9370fcd3122:
+    type: CONTAINER
+    name: logoCircle
+    slots:
+      canvas:
+        - nodeID: 7a8abbd7-c3e6-4d7c-8d95-969b365edaa6
+          orderKey: a0
+    properties:
+      left: '6'
+      width: 64px
+      height: 64px
+      layoutStyle: HORIZONTAL_STACK
+      padding: '0'
+      backgroundColor: '#6967E2'
+      borderRadius: 1000px
+  5ad827d1-ff22-4531-a36d-25d3ced448a5:
+    type: CONTAINER
+    name: userInfoContainer
+    slots:
+      canvas:
+        - nodeID: 7b92cf6a-8e78-4293-b539-724fb02bd0af
+          orderKey: Zu
+        - nodeID: 45908125-ab82-445e-b6ae-17097bd4df5e
+          orderKey: Zv
+        - nodeID: dede88d8-5ccd-4fa2-a0be-80e2813954b2
+          orderKey: Zw
+        - nodeID: c2a64ce8-81d2-41f2-b72d-cd7809199d2e
+          orderKey: Zx
+        - nodeID: bcb33017-3f21-4747-a593-08fa35378a24
+          orderKey: Zy
+        - nodeID: 4c4d981f-e0e8-405d-b0ef-8b68994c21e2
+          orderKey: Zz
+        - nodeID: e5c08848-9d35-40ca-80e3-5a0bc9452ace
+          orderKey: a0
+    properties:
+      top: '6'
+      width: '12'
+      height: '17'
+      styles: |-
+        element.styles {
+          border: 1px solid rgba(128, 128, 128, 0.25);
+        }
+      borderRadius: '5'
+  5ae74803-a5ec-4f2e-aa68-0db4024e98a8:
+    type: FUNCTION
+    name: readmeLink
+    properties:
+      action:
+        path: /README
+        target: _self
+        targetNode:
+          ref: e4b06603-006c-464a-90ff-b971cd03c536
+        actionType: NAVIGATE_TO_PAGE
+  649568b9-3b1e-4d66-b01e-9e15ec840bf1:
+    type: CONFIG
+    name: github_client_secret
+    properties:
+      value: ab0ebae3-2a4d-43ef-ab06-543c64faac2c
+      type: secret
+  67e0d2b7-4ac8-4fdd-b3b4-fd5cec883050:
+    type: COMPONENT/f18d2641-f968-47c7-8b97-509c1bf13d97
+    name: pageHeader
+    componentRef: f18d2641-f968-47c7-8b97-509c1bf13d97
+    properties:
+      width: '12'
+      height: '4'
+      $props: |-
+        {
+          headerText: "My Application",
+          signOutEnabled: {{getUserInfo.data ? true : false}}
+        }
+  784fc78d-471b-45a1-971d-c156f787e08d:
+    type: FUNCTION
+    name: userSignout
+    properties:
+      action:
+        targetNode:
+          ref: 19e51a8d-13ed-4acf-81b6-8d67e4cefe8c
+        actionType: SIGN_OUT
+      onSuccess:
+        function:
+          ref: dac6452c-e5b5-49ca-a30b-10a5cfcbccbf
+  788490e6-edf0-408d-94c6-23a1a32b30c4:
+    type: FUNCTION
+    name: getUserInfo
+    properties:
+      action:
+        targetNode:
+          ref: 19e51a8d-13ed-4acf-81b6-8d67e4cefe8c
+        actionType: GET_SESSION
+      runOnPageLoad: '{{true}}'
+  78f8d7ae-90c4-442d-a5d9-6b801d30f000:
+    type: TEXT
+    name: authResourceNodeNameLabel
+    properties:
+      top: '10'
+      width: '12'
+      height: '1'
+      value: Auth Resource Node Name
+      fontSize: sm
+      textOverflow: ellipsis
+  7a8abbd7-c3e6-4d7c-8d95-969b365edaa6:
+    type: TEXT
+    name: logoEmoji
+    properties:
+      width: fill
+      height: fill
+      value: 🐶
+      fontSize: 4xl
+      textAlign: center
+  7b92cf6a-8e78-4293-b539-724fb02bd0af:
+    type: TEXT
+    name: userInfoTitle
+    properties:
+      width: '12'
+      height: '2'
+      styles: |-
+        element.styles {
+          line-height: 1.2;
+        }
+      value: 👥 User Info
+      fontSize: 2xl
+      fontWeight: bold
+      textOverflow: ellipsis
+  85be03a7-26f3-448e-a28c-b02f140eaac4:
+    type: PAGE
+    name: auth
+    slots:
+      canvas:
+        - nodeID: a294bbbe-73d1-4be5-8356-bd86a36aa57b
+          orderKey: Zy
+        - nodeID: af194ed1-3864-467d-b06b-4c1c70a579ff
+          orderKey: Zz
+      functions:
+        - nodeID: efdca26e-20a6-4eca-8987-3fb876f15053
+          orderKey: a0
+        - nodeID: 5ae74803-a5ec-4f2e-aa68-0db4024e98a8
+          orderKey: a1
+    properties:
+      maxWidth: 480px
+      authorizationRules: |-
+        [
+          {
+            if: {
+              $and: [
+                {
+                  'session/user': {
+                    $exists: true,
+                  },
+                },
+              ],
+            },
+            then: {
+              allow: false,
+              statusCode: 302,
+              redirectTo: '/',
+            },
+          },
+          {
+            if: {
+              $and: [
+                {
+                  'session/user': {
+                    $exists: false,
+                  },
+                },
+              ],
+            },
+            then: {
+              allow: true,
+            },
+          },
+        ]
+  8ff46619-9b55-4861-8bf0-af3684a9187c:
+    type: CONTAINER
+    name: logoContainer
+    slots:
+      canvas:
+        - nodeID: 53655710-9379-48a8-839e-e9370fcd3122
+          orderKey: a0
+    properties:
+      width: '12'
+      height: '6'
+      styles: |-
+        element.styles {
+        box-shadow:none;
+        }
+      layoutStyle: HORIZONTAL_STACK
+      padding: '0'
+      spacing: '0'
+      distributeContent: center
+      alignContent: center
+  9830f7f2-bca7-44af-8ea8-a496c5ac530b:
+    type: CONTAINER
+    name: providerInfoContainer
+    slots:
+      canvas:
+        - nodeID: acc2aba0-4328-45b4-95ad-316881d74a79
+          orderKey: Zu
+        - nodeID: 36173fa4-c680-436f-9449-fded1f3c14a0
+          orderKey: Zv
+        - nodeID: d222d3af-3256-4597-8f51-1e9d94790578
+          orderKey: Zw
+        - nodeID: db232d39-0b54-4759-a79c-735e01db955f
+          orderKey: Zx
+        - nodeID: 78f8d7ae-90c4-442d-a5d9-6b801d30f000
+          orderKey: Zy
+        - nodeID: 25865758-88d1-466a-9ee5-d5dc858dc3e3
+          orderKey: Zz
+        - nodeID: cf7a5060-e131-43cd-a7c6-46e6f61e9fdb
+          orderKey: a0
+    properties:
+      top: '24'
+      width: '12'
+      height: '17'
+      styles: |-
+        element.styles {
+          border: 1px solid rgba(128, 128, 128, 0.25);
+        }
+      borderRadius: '5'
+  9f24a8bf-f473-44bc-be30-5f9f93af0b73:
+    type: PAGE
+    name: README
+    slots:
+      canvas:
+        - nodeID: c17f35d8-68d6-43f9-bc75-f0faa46a066b
+          orderKey: Zx
+        - nodeID: 1c8b806b-f233-47ff-a95c-ce8ffca57e2b
+          orderKey: Zy
+        - nodeID: 052ab897-60ae-412d-9847-7c026c1a888e
+          orderKey: Zz
+      functions:
+        - nodeID: 03e8e2ed-0901-4570-b59a-9eddae662ecf
+          orderKey: a0
+        - nodeID: cfa6e330-28d3-4bcf-92ca-442abcd14557
+          orderKey: a1
+    properties:
+      minHeight: 4236px
+      authorizationRules: |-
+        [
+          {
+            if: {
+              $and: [
+                {
+                  'session/user': {
+                    $exists: false,
+                  },
+                },
+              ],
+            },
+            then: {
+              allow: true,
+            },
+          },
+          {
+            if: {
+              $and: [
+                {
+                  'session/user': {
+                    $exists: true,
+                  },
+                },
+              ],
+            },
+            then: {
+              allow: true,
+            },
+          },
+        ]
+  a294bbbe-73d1-4be5-8356-bd86a36aa57b:
+    type: BUTTON
+    name: readmeButton
+    properties:
+      left: '8'
+      width: '5'
+      height: '3'
+      onClick:
+        function:
+          ref: 4f244a5a-78df-4687-862c-0b68168112b9
+      text: View README
+      textColor: text.muted
+      backgroundColor: |
+        transparent
+      variant: outline
+  a80c572a-aa7d-4b27-be6d-063f306d091a:
     type: PAGE
     name: index
-    parentNodeID: ROOT_NODE
-    parentSlot: pages
+    slots:
+      canvas:
+        - nodeID: 67e0d2b7-4ac8-4fdd-b3b4-fd5cec883050
+          orderKey: Zw
+        - nodeID: 44f052dc-efbf-44bf-bf88-d308d3c2147c
+          orderKey: Zx
+      functions:
+        - nodeID: 788490e6-edf0-408d-94c6-23a1a32b30c4
+          orderKey: a2
+        - nodeID: 4f244a5a-78df-4687-862c-0b68168112b9
+          orderKey: a3
+  acc2aba0-4328-45b4-95ad-316881d74a79:
+    type: TEXT
+    name: authResourceInfoTitle
+    properties:
+      width: '12'
+      height: '2'
+      styles: |-
+        element.styles {
+          line-height: 1.2;
+        }
+      value: 🔐 Authentication Resource Info
+      fontSize: 2xl
+      fontWeight: bold
+      textOverflow: ellipsis
+  acf7198f-92fd-48d2-8c14-f514dbfb6eca:
+    type: TEXT
+    name: signedInIndicator
+    properties:
+      isVisible: '{{!getUserInfo.data && getUserInfo.error}}'
+      top: '5'
+      left: '9'
+      width: '4'
+      height: '2'
+      value: Not Signed In
+      fontSize: sm
+      textAlign: right
+  af194ed1-3864-467d-b06b-4c1c70a579ff:
+    type: CONTAINER
+    name: signInContainer
+    slots:
+      canvas:
+        - nodeID: 8ff46619-9b55-4861-8bf0-af3684a9187c
+          orderKey: Zx
+        - nodeID: fcd9a5aa-9fc9-4c3a-a127-149fd32c4c1c
+          orderKey: Zz
+        - nodeID: 2eb4c1f7-9c45-442a-a6eb-4d36e4076464
+          orderKey: a0
+    properties:
+      top: '9'
+      width: '12'
+      height: '31'
+      styles: |-
+        element.styles {
+          border: 1px solid rgba(128, 128, 128, 0.25);
+        }
+      borderRadius: '5'
+  b02648bb-07a7-4230-b2c5-f172be28e373:
+    type: BUTTON
+    name: signOutButton
+    properties:
+      isEnabled: '{{$props.signOutEnabled}}'
+      left: '9'
+      width: '4'
+      height: '2'
+      onClick:
+        function:
+          ref: 784fc78d-471b-45a1-971d-c156f787e08d
+      text: Sign Out
+  ba8d3744-1d6f-468c-80b2-8c175f1be615:
+    type: PAGE
+    name: userInfoExample
+    slots:
+      canvas:
+        - nodeID: dbfea991-9023-4a7b-83cb-c5a9e9c685ec
+          orderKey: Zz
+        - nodeID: 5ad827d1-ff22-4531-a36d-25d3ced448a5
+          orderKey: a0
+        - nodeID: 9830f7f2-bca7-44af-8ea8-a496c5ac530b
+          orderKey: a1
+      functions:
+        - nodeID: f1148bef-42ee-4d4e-bd62-2f00889624ff
+          orderKey: a0
+  bcb33017-3f21-4747-a593-08fa35378a24:
+    type: TEXT
+    name: userEmailDomainLabel
+    properties:
+      top: '10'
+      width: '12'
+      height: '1'
+      value: User Email Domain
+      fontSize: sm
+      textOverflow: ellipsis
+  bdef48e4-0e40-4471-bb95-e397ae675bfd:
+    type: FUNCTION
+    name: readmeLink
+    properties:
+      action:
+        path: /README
+        target: _self
+        targetNode:
+          ref: e4b06603-006c-464a-90ff-b971cd03c536
+        actionType: NAVIGATE_TO_PAGE
+  c17f35d8-68d6-43f9-bc75-f0faa46a066b:
+    type: TEXT
+    name: readmeMarkdownText
+    properties:
+      top: '6'
+      width: '12'
+      height: '112'
+      styles: |-
+        :root {
+          /* https://developer.mozilla.org/en-US/docs/Web/CSS/:root */
+        }
+
+        h2, h3 {
+          margin-bottom: 5px;
+        }
+
+        p {
+          line-height: 1.8;
+        }
+
+        ol {
+          margin-top: 10px;
+        }
+      value: >
+        ## How to Use this Template
+
+        This template provides all of the basics for building a private
+        application that requires user login. You’ll need to configure a few
+        things to get started, but once configured, you’ll be able to make a
+        private app with as many pages as you’d like by right clicking on the
+        `index` page and clicking duplicate.
+
+
+        &nbsp;
+
+
+        ### Steps to get started
+
+        While it’s possible (and encouraged!) to deploy this template right away
+        (by clicking the rocketship at the top right of this window), you’ll be
+        missing out on a few things until you complete the steps below.
+
+
+        1. **Remove or update the GitHub auth resource** with your own client ID
+        and secret. It wont work correctly until the information is updated or
+        the resource is removed.
+
+        2. **Update the index page** with your own content, but before you do,
+        make sure to checkout the `getUserInfo` function and the
+        `userInfoExample` page for examples on how to retrieve and display user
+        session information. *Note: To see any user info you'll need to login to
+        the application itself. You can do this in the editor by navigating to
+        the `/auth` page switching to "Interact" mode using `CMD / CTRL + ALT`
+        and logging into the app with your email.*
+
+        3. **Update the auth page** with your own application name and logo.
+
+        4. (Optional) If this application is going to be an internal
+        application, you’ll want to **update the sign-in rules** under the
+        settings page to use the `Email Domain is in` rule with
+        `your-domain.com` to keep anyone without your corporate email from
+        logging in. You can also use the `Email is in` rule if you only want to
+        allow a few specific people.
+
+        5. **Remove the "View README"** button in the header by navigating to
+        the "Components" tab on the left side of the screen and deleting the
+        `readmeButton` from the `pageHeader` component.
+
+        6. **Delete this README**. It’s fully public, so we strongly suggest
+        deleting it before publishing your application. Or, if you’d like to
+        practice editing authorization rules, you can make this page private by
+        deleting the auth rule overrides from this specific page as the
+        application default rules set all pages to require login.
+
+        7. **Delete the `userInfoExample` page** or customize it for your
+        use-case.
+
+        8. **Deploy your new app!**
+
+
+        &nbsp;
+
+
+        ## Additional Reference
+
+
+        &nbsp;
+
+
+        ### Pages
+
+
+        - `index`: This is the main page of your application. You should always
+        have a page named `index`, but feel free to update it however you want.
+        This is also the page you’ll want to duplicate when making new pages for
+        your application!
+
+        - `auth`: This is your sign-in page. If users are not logged in, they
+        will be redirected here from any other private page. If they are logged
+        in, they’ll automatically be redirected to the index page.
+
+        - `userInfoExample`: We’ve included some example components and code to
+        show you how to get and display user session info.
+
+        - `README`: That’s this page! Feel free to delete it when you’re ready
+        to go live.
+
+
+        &nbsp;
+
+
+        ### Authentication & Authorization
+
+
+        Rules related to authentication and authorization can be found in two
+        different places. Sign-in and default authorization rules for the entire
+        app can be found at the bottom of the left side-bar under `Settings`.
+        Authorization rules for individual pages can be found for the currently
+        selected page in the right-hand side properties panel under
+        `Authorization`.
+
+
+        &nbsp;
+
+
+        #### Default Configuration
+
+
+        The default authorization configuration for this template consists of
+        three rules:
+
+        1. If user is authenticated then allow.
+
+        2. If user is unauthenticated then redirect to `/auth`.
+
+        3. Everyone else deny.
+
+
+        &nbsp;
+
+
+        Since this configuration is inherited by every page in the application,
+        we don’t need to specify any additional rules on pages that we want to
+        be private. However, you’ll notice that since the `/auth` page is
+        public, it does overwrite these rules with a rule set that is nearly
+        inverse:
+
+        1. If user is authenticated then redirect to `/`.
+
+        2. If user is unauthenticated then allow`.
+
+        3. Everyone else deny.
+
+
+        &nbsp;
+
+
+        #### Creating A Sign-in Rule
+
+        While the default auth rules make sure that someone is authenticated,
+        they don’t care who exactly gets let into the app. This is where sign-in
+        rules come into play. As mentioned in the steps to get started, you’ll
+        want to update the sign-in rules to either use the `Email Domain is in`
+        rule with `your-domain.com` or `Email is in` rule.
+
+
+        &nbsp;
+
+
+        #### Configuring Resources
+
+        Many additional authentication resources are available for you to use
+        including: Google, Facebook, Okta, Microsoft (Azure AD), or any spec
+        compliant OIDC provider. However, we’ve included the One-time PIN and
+        GitHub resources in this boilerplate due to their relative ease of
+        configuration.
+
+        - **One-time PIN**: Doesn’t require any additional configuration and
+        uses the same infrastructure we use for our own logins (without users
+        needing a Dynaboard account) to validate user emails.
+
+        - **GitHub**: apps can easily be created and configured under Settings >
+        Developer Setting > OAuth Apps in the GitHub dashboard. 
+      renderMode: markdown
+      verticalAlign: top
+  c2a64ce8-81d2-41f2-b72d-cd7809199d2e:
+    type: TEXT
+    name: userEmailDomainDisplay
+    properties:
+      top: '8'
+      width: '12'
+      height: '2'
+      value: '{{getUserInfo.data?.emailDomain ?? ''(unknown)''}}'
+      fontSize: lg
+      fontWeight: bold
+  cf7a5060-e131-43cd-a7c6-46e6f61e9fdb:
+    type: TEXT
+    name: authResourceDisplayNameLabel
+    properties:
+      top: '14'
+      width: '12'
+      height: '1'
+      value: Auth Resource Display Name
+      fontSize: sm
+      textOverflow: ellipsis
+  cfa6e330-28d3-4bcf-92ca-442abcd14557:
+    type: FUNCTION
+    name: getUserSession
+    properties:
+      action:
+        targetNode:
+          ref: 19e51a8d-13ed-4acf-81b6-8d67e4cefe8c
+        actionType: GET_SESSION
+      runOnPageLoad: '{{true}}'
+  d222d3af-3256-4597-8f51-1e9d94790578:
+    type: TEXT
+    name: authResourceTypeLabel
+    properties:
+      top: '6'
+      width: '12'
+      height: '1'
+      value: Auth Resource Type
+      fontSize: sm
+      textOverflow: ellipsis
+  dac6452c-e5b5-49ca-a30b-10a5cfcbccbf:
+    type: FUNCTION
+    name: signoutRedirect
+    properties:
+      action:
+        path: /auth
+        target: _self
+        targetNode:
+          ref: e4b06603-006c-464a-90ff-b971cd03c536
+        actionType: NAVIGATE_TO_PAGE
+  db232d39-0b54-4759-a79c-735e01db955f:
+    type: TEXT
+    name: authResourceNodeNameDisplay
+    properties:
+      top: '8'
+      width: '12'
+      height: '2'
+      overflow: ''
+      overflowX: ''
+      overflowY: ''
+      value: '{{getUserInfo.data?.provider.resourceName ?? ''(unknown)''}}'
+      fontSize: lg
+      fontWeight: bold
+  dbfea991-9023-4a7b-83cb-c5a9e9c685ec:
+    type: COMPONENT/f18d2641-f968-47c7-8b97-509c1bf13d97
+    name: pageHeader
+    componentRef: f18d2641-f968-47c7-8b97-509c1bf13d97
+    properties:
+      width: '12'
+      height: '4'
+      $props: |-
+        {
+          headerText: "User Information Example"
+        }
+  de555cfd-936b-47f8-af1b-95630f0dc8fa:
+    type: THEME
+    name: authTheme
+    properties:
+      theme: |-
+        return {
+          colors: {
+            light: {
+              text: {
+                primary: "#111215",
+                muted: "#707173",
+                accent: "#6967E2",
+                warning: "#E5B847"
+              },
+              surface: {
+                100: "#FFFFFF",
+                200: "#F6F6F6",
+                300: "#ECECED",
+                400: "#D9D9D9"
+              },
+              brand: {
+                primary: '#FF0000'
+              }
+            },
+            dark: {
+              text: {
+                primary: "#FFFFFF",
+                muted: "#88888A",
+                accent: "#7A79CD",
+                warning: "#FCCA4C"
+              },
+              surface: {
+                100: "#111215",
+                200: "#1A1B1E",
+                300: "#242527",
+                400: "#37383B"
+              },
+              brand: {
+                primary: '#6967E2'
+              }
+            }
+          }
+        }
+  dede88d8-5ccd-4fa2-a0be-80e2813954b2:
+    type: TEXT
+    name: userEmailLabel
+    properties:
+      top: '6'
+      width: '12'
+      height: '1'
+      value: User Email
+      fontSize: sm
+      textOverflow: ellipsis
+  e4b06603-006c-464a-90ff-b971cd03c536:
+    type: RESOURCE/BROWSER
+    name: browser1
+  e51f3503-2710-4e96-a08a-b25e9e12d9d6:
+    type: RESOURCE/GITHUB_AUTH
+    name: githubAuth1
+    properties:
+      clientID: 
+      clientSecret:
+        ref: 649568b9-3b1e-4d66-b01e-9e15ec840bf1
+      displayName: GitHub
+  e5c08848-9d35-40ca-80e3-5a0bc9452ace:
+    type: TEXT
+    name: userNameLabel
+    properties:
+      top: '14'
+      width: '12'
+      height: '1'
+      value: User Name
+      fontSize: sm
+      textOverflow: ellipsis
+  efdca26e-20a6-4eca-8987-3fb876f15053:
+    type: FUNCTION
+    name: successRedirect
+    properties:
+      action:
+        path: /
+        target: _self
+        targetNode:
+          ref: e4b06603-006c-464a-90ff-b971cd03c536
+        actionType: NAVIGATE_TO_PAGE
+  f1148bef-42ee-4d4e-bd62-2f00889624ff:
+    type: FUNCTION
+    name: getUserInfo
+    properties:
+      action:
+        targetNode:
+          ref: 19e51a8d-13ed-4acf-81b6-8d67e4cefe8c
+        actionType: GET_SESSION
+      runOnPageLoad: '{{true}}'
+  f18d2641-f968-47c7-8b97-509c1bf13d97:
+    type: COMPONENT
+    name: pageHeader
+    slots:
+      canvas:
+        - nodeID: 2f4a9d12-86f8-49e6-b114-26dac5e1027f
+          orderKey: Zx
+        - nodeID: b02648bb-07a7-4230-b2c5-f172be28e373
+          orderKey: Zy
+        - nodeID: 1136b3dc-a411-4b78-a8b8-8422c9cd530e
+          orderKey: Zz
+      functions:
+        - nodeID: bdef48e4-0e40-4471-bb95-e397ae675bfd
+          orderKey: a0
+        - nodeID: 784fc78d-471b-45a1-971d-c156f787e08d
+          orderKey: a1
+        - nodeID: dac6452c-e5b5-49ca-a30b-10a5cfcbccbf
+          orderKey: a2
+        - nodeID: ff606b50-d336-4959-9b0f-cdea8a5d21df
+          orderKey: a3
+    properties:
+      height: 70px
+      width: 592px
+      distributeContent: center
+      alignContent: center
+      wrapContent: wrap
+      $props: |-
+        { headerText: "Default Page Title", 
+          signOutEnabled: false }
+  fcd9a5aa-9fc9-4c3a-a127-149fd32c4c1c:
+    type: TEXT
+    name: signInTitle
+    properties:
+      top: '7'
+      width: '12'
+      height: '4'
+      styles: |-
+        element.styles {
+          border-bottom: 2px;
+          padding-bottom: 0.6em;
+          line-height: 1.2;
+          border-color: rgba(128, 128, 128, 0.5);
+        }
+      value: My Application Sign-in
+      fontSize: 3xl
+      textAlign: center
+      fontWeight: '600'
+  ff606b50-d336-4959-9b0f-cdea8a5d21df:
+    type: FUNCTION
+    name: getUserInfo
+    properties:
+      action:
+        targetNode:
+          ref: 19e51a8d-13ed-4acf-81b6-8d67e4cefe8c
+        actionType: GET_SESSION
+      runOnPageLoad: '{{true}}'
