@@ -536,18 +536,6 @@ nodes:
       fontSize: 2xl
       fontWeight: bold
       textOverflow: ellipsis
-  acf7198f-92fd-48d2-8c14-f514dbfb6eca:
-    type: TEXT
-    name: signedInIndicator
-    properties:
-      isVisible: '{{!getUserInfo.data && getUserInfo.error}}'
-      top: '5'
-      left: '9'
-      width: '4'
-      height: '2'
-      value: Not Signed In
-      fontSize: sm
-      textAlign: right
   af194ed1-3864-467d-b06b-4c1c70a579ff:
     type: CONTAINER
     name: signInContainer
@@ -932,7 +920,7 @@ nodes:
     type: RESOURCE/GITHUB_AUTH
     name: githubAuth1
     properties:
-      clientID: 
+      clientID: null
       clientSecret:
         ref: 649568b9-3b1e-4d66-b01e-9e15ec840bf1
       displayName: GitHub
