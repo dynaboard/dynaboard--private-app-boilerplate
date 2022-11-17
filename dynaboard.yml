@@ -1,4 +1,4 @@
-runtimeVersion: 0.3.2
+runtimeVersion: 0.3.4
 name: Private App Boilerplate
 description: ''
 type: com.dynaboard/project
@@ -83,13 +83,15 @@ nodes:
     type: BUTTON
     name: demoReturnButton
     properties:
+      top: '2'
       left: '11'
       width: '2'
-      height: '3'
+      height: '2'
       onClick:
         function:
           ref: 03e8e2ed-0901-4570-b59a-9eddae662ecf
       text: Back to Demo
+      leftIcon: ArrowLeftIcon
   1136b3dc-a411-4b78-a8b8-8422c9cd530e:
     type: BUTTON
     name: readmeButton
@@ -114,7 +116,7 @@ nodes:
     name: pageTitleText
     properties:
       width: '10'
-      height: '3'
+      height: '4'
       styles: |-
         element.styles {
           line-height: 1.2em;
@@ -180,10 +182,55 @@ nodes:
     type: TEXT
     name: gettingStartedText
     properties:
-      top: '25'
+      top: '26'
       left: '3'
       width: '8'
       height: '4'
+      styles: |-
+        :root {
+          /* https://developer.mozilla.org/en-US/docs/Web/CSS/:root */
+        }
+
+        a {
+          color: #6968C3;
+          font-weight: 400;
+          text-decoration: underline;
+        }
+
+        h1, h2, h3 {
+          font-weight: 400;
+          margin-bottom: 5px;
+        }
+
+        h4, h5, h6 {
+          font-weight: 500;
+          margin-bottom: 5px;
+        }
+
+        p {
+          line-height: 1.8;
+        }
+
+        ol {
+          margin-top: 10px;
+        }
+
+        ul {
+          margin-top: 10px;
+        }
+
+        li {
+          line-height: 1.6;
+        }
+
+        li em {
+          line-height: 1.6;
+        }
+
+        code {
+          padding: 0px 4px;
+          border-radius: 4px;
+        }
       value: >-
         Check out the __[README](/README)__, visit the __[User Info
         Example](/userInfoExample)__ page, or duplicate this page to get
@@ -497,8 +544,8 @@ nodes:
     type: BUTTON
     name: readmeButton
     properties:
-      left: '8'
-      width: '5'
+      left: '9'
+      width: '4'
       height: '3'
       onClick:
         function:
@@ -508,6 +555,7 @@ nodes:
       backgroundColor: |
         transparent
       variant: outline
+      leftIcon: ReaderIcon
   a80c572a-aa7d-4b27-be6d-063f306d091a:
     type: PAGE
     name: index
@@ -608,13 +656,25 @@ nodes:
     properties:
       top: '6'
       width: '12'
-      height: '112'
+      height: '117'
       styles: |-
         :root {
           /* https://developer.mozilla.org/en-US/docs/Web/CSS/:root */
         }
 
-        h2, h3 {
+        a {
+          color: #6968C3;
+          font-weight: 400;
+          text-decoration: underline;
+        }
+
+        h1, h2, h3 {
+          font-weight: 400;
+          margin-bottom: 5px;
+        }
+
+        h4, h5, h6 {
+          font-weight: 500;
           margin-bottom: 5px;
         }
 
@@ -624,6 +684,23 @@ nodes:
 
         ol {
           margin-top: 10px;
+        }
+
+        ul {
+          margin-top: 10px;
+        }
+
+        li {
+          line-height: 1.6;
+        }
+
+        li em {
+          line-height: 1.6;
+        }
+
+        code {
+          padding: 0px 4px;
+          border-radius: 4px;
         }
       value: >
         ## How to Use this Template
@@ -920,10 +997,15 @@ nodes:
     type: RESOURCE/GITHUB_AUTH
     name: githubAuth1
     properties:
-      clientID: null
-      clientSecret:
-        ref: 649568b9-3b1e-4d66-b01e-9e15ec840bf1
-      displayName: GitHub
+      profiles:
+        - environment: ''
+          clientID: f38d5cf66895d98d0175
+          clientSecret:
+            ref: 649568b9-3b1e-4d66-b01e-9e15ec840bf1
+          scope: ''
+          route: ''
+          isSignInProvider: '{{true}}'
+          displayName: GitHub
   e5c08848-9d35-40ca-80e3-5a0bc9452ace:
     type: TEXT
     name: userNameLabel
@@ -997,9 +1079,9 @@ nodes:
           border-color: rgba(128, 128, 128, 0.5);
         }
       value: My Application Sign-in
-      fontSize: 3xl
+      fontSize: 4xl
       textAlign: center
-      fontWeight: '600'
+      fontWeight: '700'
   ff606b50-d336-4959-9b0f-cdea8a5d21df:
     type: FUNCTION
     name: getUserInfo
